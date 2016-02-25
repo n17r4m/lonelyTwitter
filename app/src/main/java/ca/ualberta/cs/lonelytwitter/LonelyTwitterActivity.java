@@ -57,7 +57,7 @@ public class LonelyTwitterActivity extends Activity {
                 adapter.notifyDataSetChanged();
 
                 // TODO: Replace with Elasticsearch
-                saveInFile();
+                ElasticsearchTweetController.addTweet(latestTweet);
 
                 setResult(RESULT_OK);
             }
@@ -70,7 +70,8 @@ public class LonelyTwitterActivity extends Activity {
 
         // Get latest tweets
         // TODO: Replace with Elasticsearch
-        loadFromFile();
+        tweets = ElasticsearchTweetController.getTweets("happy");
+
 
         // Binds tweet list with view, so when our array updates, the view updates with it
         adapter = new ArrayAdapter<Tweet>(this, R.layout.list_item, tweets);
