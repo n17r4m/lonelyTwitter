@@ -78,13 +78,12 @@ public class LonelyTwitterActivity extends Activity {
                 tweets.add(latestTweet);
 
                 latestTweet.addThumbnail(thumbnail);
-                adapter.notifyDataSetChanged();
 
+                getTweets();
                 // Add the tweet to Elasticsearch
                 ElasticsearchTweetController.AddTweetTask addTweetTask = new ElasticsearchTweetController.AddTweetTask();
                 addTweetTask.execute(latestTweet);
-                onStart();
-
+                tweets.add(0, latestTweet);
                 // http://stackoverflow.com/questions/11835251/remove-image-resource-of-imagebutton
 
                 bodyText.setText("");
@@ -92,7 +91,9 @@ public class LonelyTwitterActivity extends Activity {
                 thumbnail = null;
 
                 setResult(RESULT_OK);
-                getTweets();
+
+
+                adapter.notifyDataSetChanged();
             }
         });
         // ATTENTION: This was auto-generated to implement the App Indexing API.
